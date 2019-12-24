@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  api-php:
+    env_file:
+      - .env.dev  
+    volumes:
+      - ./docker/php/conf.d/symfony.dev.ini/:/usr/local/etc/php/conf.d/symfony.ini
+      - ./:/srv/api:rw,cached      
