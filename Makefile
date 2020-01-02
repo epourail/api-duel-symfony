@@ -45,7 +45,7 @@ status: ## Show status of containers
 ps: status ## Alias of status
 
 .PHONY: shell
-shell: ## Start a shell session in the c=<name> container 
+shell: ## Start a shell session in the c=<name> container
 	@$(DOCKER_COMPOSE_EXEC) -T $(c) '/bin/sh'
 
 .PHONY: exec
@@ -64,3 +64,31 @@ clean: ## Clean the docker services
 clean-all: ## Remove the docker images (docker services, network and volumes)
 	@$(DOCKER_COMPOSE_DOWN) -v
 	@$(DOCKER_COMPOSE_RM) -fsv
+
+.PHONY: run-tests
+run-tests:
+	@$(DOCKER_COMPOSE) -f docker-compose.yaml -f docker-compose.test.yaml run api-tests run $(suite) $(coverage)
+
+.PHONY: run-tests-all
+run-tests-all: ## Run the tests (unit, api, acceptance)
+	@make -s run-tests suite=unit,api,acceptance
+
+.PHONY: run-tests-unit
+run-tests-unit: ## Run the unitary tests
+	@make -s run-tests suite=unit
+
+.PHONY: run-tests-unit-coverage
+run-tests-unit-coverage: ## Run the unitary tests and generated the code coverage
+	@make -s run-tests suite=unit coverage='--coverage --coverage-html'
+
+.PHONY: run-tests-api
+run-tests-api: ## Run the api tests
+	@make -s run-tests suite=api
+
+.PHONY: run-tests-api-coverage
+run-tests-api-coverage: ## Run the api tests and generated the code coverage
+	@make -s run-tests suite=api coverage='--coverage --coverage-html'
+
+.PHONY: run-tests-acceptance
+run-tests-acceptance: ## Run the acceptance tests
+	@make -s run-tests suite=acceptance

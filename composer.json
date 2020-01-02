@@ -13,6 +13,12 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "^1.1",
+        "codeception/module-phpbrowser": "^1.0",
+        "codeception/module-rest": "^1.0",
+        "codeception/module-symfony": "^1.0",
+        "phpunit/phpunit": "^8.5"
     },
     "config": {
         "preferred-install": {

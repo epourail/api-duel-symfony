@@ -1,9 +1,16 @@
-version: '3.4'
+version: '3.7'
 
 services:
   api-php:
+    build:
+      args: 
+        ARG_APP_ENV: dev  
     env_file:
-      - .env.dev  
+      - .env.dev
     volumes:
       - ./docker/php/conf.d/symfony.dev.ini/:/usr/local/etc/php/conf.d/symfony.ini
-      - ./:/srv/api:rw,cached      
+      - ./:/srv/api:rw,cached
+
+  api-nginx:
+    volumes:
+      - ./public:/srv/api/public:ro

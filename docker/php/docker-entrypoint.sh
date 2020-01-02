@@ -8,6 +8,10 @@ fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 
+	echo "UID = $UID"
+	echo "GID = $GUID"
+	echo "APP_ENV = $APP_ENV"
+	
 	PHP_INI_RECOMMENDED="$PHP_INI_DIR/php.ini-production"
 	if [ "$APP_ENV" != 'prod' ]; then
 		PHP_INI_RECOMMENDED="$PHP_INI_DIR/php.ini-development"
@@ -18,8 +22,8 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
 
-	composer dump-env ${APP_ENV};
 	if [ "$APP_ENV" != 'prod' ]; then
+		#composer dump-env ${APP_ENV};
 		composer install --prefer-dist --no-progress --no-suggest --no-interaction
 	fi
 
