@@ -1,0 +1,32 @@
+# Tell Travis CI we are using PHP
+language: php
+# The platforms you wants to test on
+dist: bionic
+os:
+  - linux
+# Define the php versions against we want to test our code
+php:
+  - '7.3'
+
+# Install packages those will be required during build
+install:
+  - composer install --no-interaction
+
+# Run main commands
+script:
+  - vendor/bin/codecept run unit,api
+#  - make run-tests-unit
+#  - make run-tests-api
+#  - make run-tests-acceptance
+
+# Tell Travis CI to monitor only 'master' branch
+branches:
+  only: 
+    - master
+    - feature/travis-continuous-integration
+
+# Cache folder, you can delete cache from Travis CI web interface
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache

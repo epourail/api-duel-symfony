@@ -5,10 +5,12 @@
 Two docker containers:
   - api-php : PHP 7.3 / Symfony 5.X
   - api-nginx : NGINX 1.17
+  
 
 ## Test
 
-[codeception](https://codeception.com/) to run all the tests
+Adding the `docker-compose.test.yaml` you can run the tests 
+via a [codeception](https://codeception.com/) container named `api-test` 
 
 ```bash
 make run-tests-all
