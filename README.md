@@ -1,4 +1,5 @@
-# Web service with PHP/Symfony
+# Web service with PHP/Symfony 
+[![Build Status](https://travis-ci.org/epourail/template-api-symfony.svg?branch=master)](https://travis-ci.org/epourail/template-api-symfony)
 
 This project is a skeleton to develop/build a Symfony project behind a nginx server.
 Features
