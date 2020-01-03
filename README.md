@@ -1,40 +1,67 @@
-# Template to develop/build a Symfony project
+# Web service with PHP/Symfony
 
-## Introduction
-
-Two docker containers:
-  - api-php : PHP 7.3 / Symfony 5.X
-  - api-nginx : NGINX 1.17
-  
+This project is a skeleton to develop/build a Symfony project behind a nginx server.
+Features
+- [x] Docker containers:
+  - [x] api-php : PHP 7.3 / Symfony 5.X
+  - [x] api-nginx : NGINX 1.17
+  - [x] api-tests : CodeCeption 4.0
+- [x] Makefile
+- [x] PHP Code Sniffer 
+- [x] Travis Continuous Integration
 
 ## Test
-
-Adding the `docker-compose.test.yaml` you can run the tests 
-via a [codeception](https://codeception.com/) container named `api-test` 
 
 ```bash
 make run-tests-all
 ```
 
+Note:
+- The unit and api tests can be executed in local within the project via the `vendor/bin/codecept` command 
+- Adding the `docker-compose.test.yaml`, you can run the tests 
+via the [codeception](https://codeception.com/) container named `api-test` 
+- The acceptance tests should be executed via the the `api-test` docker image
+
 ### Run the unitary tests
 
+**via the `api-test` docker image**
 ```bash
 make run-tests-unit
-(or make run-tests-unit-coverage)
+make run-tests-unit-coverage
+```
+
+**in local**
+```bash
+vendor/bin/codecept run unit
+vendor/bin/codecept run unit --coverage --coverage-html
 ```
 
 ### Run the api tests
 
+**via the `api-test` docker image**
 ```bash
 make run-tests-api
-(or make run-tests-api-coverage)
+make run-tests-api-coverage
+```
+
+**in local**
+```bash
+vendor/bin/codecept run api
+vendor/bin/codecept run api --coverage --coverage-html
 ```
 
 ### Run the acceptance tests
 
+**via the `api-test` docker image**
 ```bash
 make run-tests-acceptance
 ```
+
+**in local**
+```bash
+ACCEPTANCE_TEST_HOST=http://{host}:{port} vendor/bin/codecept run acceptance
+```
+Note : the host to test should be defined via the `ACCEPTANCE_TEST_HOST` environment variable
 
 ## Build
 
@@ -47,7 +74,7 @@ Usage:
   make COMMAND [c=<name>]
 
 Commands:
-  list                 List the service names availbale in the docker-compose files
+  list                 List the service names available in the docker-compose files
   build                Build all or c=<name> images
   up                   Start all or c=<name> containers in foreground
   stop                 Stop all or c=<name> containers

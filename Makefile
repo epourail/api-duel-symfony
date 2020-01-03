@@ -15,11 +15,10 @@ help:
 	| awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 # -----------------------------------------------------------------
-#  DOCKER & DOCKER COMPOSE
+#  RULES TO BUILD/RUN/MANAGE/STOP DOCKER CONTAINERS
 # -----------------------------------------------------------------
-
 .PHONY: list
-list: ## List the service names availbale in the docker-compose files
+list: ## List the service names available in the docker-compose files
 	@$(DOCKER_COMPOSE) config --services
 
 .PHONY: build
@@ -65,6 +64,9 @@ clean-all: ## Remove the docker images (docker services, network and volumes)
 	@$(DOCKER_COMPOSE_DOWN) -v
 	@$(DOCKER_COMPOSE_RM) -fsv
 
+# -----------------------------------------------------------------
+#  RULES TO RUN TESTS (UNIT, API, ACCEPTANCE WITH/WITHOUT CODE COVERAGE
+# -----------------------------------------------------------------
 .PHONY: run-tests
 run-tests:
 	@$(DOCKER_COMPOSE) -f docker-compose.yaml -f docker-compose.test.yaml run api-tests run $(suite) $(coverage)
