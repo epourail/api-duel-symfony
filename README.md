@@ -1,68 +1,19 @@
 # Web service with PHP/Symfony 
 [![Build Status](https://travis-ci.org/epourail/template-api-symfony.svg?branch=master)](https://travis-ci.org/epourail/template-api-symfony)
+[![codecov](https://codecov.io/gh/epourail/template-api-symfony/branch/master/graph/badge.svg)](https://codecov.io/gh/epourail/template-api-symfony)
 
-This project is a skeleton to develop/build a Symfony project behind a nginx server.
+This project is a template to develop/build a Symfony base-project behind a nginx server.
+
 Features
 - [x] Docker containers:
   - [x] api-php : PHP 7.3 / Symfony 5.X
   - [x] api-nginx : NGINX 1.17
   - [x] api-tests : CodeCeption 4.0
 - [x] Makefile
-- [x] PHP Code Sniffer 
-- [x] Travis Continuous Integration
-
-## Test
-
-```bash
-make run-tests-all
-```
-
-Note:
-- The unit and api tests can be executed in local within the project via the `vendor/bin/codecept` command 
-- Adding the `docker-compose.test.yaml`, you can run the tests 
-via the [codeception](https://codeception.com/) container named `api-test` 
-- The acceptance tests should be executed via the the `api-test` docker image
-
-### Run the unitary tests
-
-**via the `api-test` docker image**
-```bash
-make run-tests-unit
-make run-tests-unit-coverage
-```
-
-**in local**
-```bash
-vendor/bin/codecept run unit
-vendor/bin/codecept run unit --coverage --coverage-html
-```
-
-### Run the api tests
-
-**via the `api-test` docker image**
-```bash
-make run-tests-api
-make run-tests-api-coverage
-```
-
-**in local**
-```bash
-vendor/bin/codecept run api
-vendor/bin/codecept run api --coverage --coverage-html
-```
-
-### Run the acceptance tests
-
-**via the `api-test` docker image**
-```bash
-make run-tests-acceptance
-```
-
-**in local**
-```bash
-ACCEPTANCE_TEST_HOST=http://{host}:{port} vendor/bin/codecept run acceptance
-```
-Note : the host to test should be defined via the `ACCEPTANCE_TEST_HOST` environment variable
+- [x] Continuous Integration : Travis
+- [x] Code Coverage Report : Codecov
+- [x] Code quality
+  - [x] PHP Code Sniffer 
 
 ## Build
 
@@ -121,5 +72,61 @@ X-Robots-Tag: noindex
 pong
 ```
 
+## Test
 
+```bash
+make run-tests-all
+```
 
+Note:
+- The unit and api tests can be executed in local within the project via the `vendor/bin/codecept` command 
+- Adding the `docker-compose.test.yaml`, you can run the tests 
+via the [codeception](https://codeception.com/) container named `api-test` 
+- The acceptance tests should be executed via the the `api-test` docker image
+
+### Run the unitary tests
+
+**via the `api-test` docker image**
+```bash
+make run-tests-unit
+make run-tests-unit-coverage
+```
+
+**in local**
+```bash
+vendor/bin/codecept run unit
+vendor/bin/codecept run unit --coverage --coverage-html
+```
+
+### Run the api tests
+
+**via the `api-test` docker image**
+```bash
+make run-tests-api
+make run-tests-api-coverage
+```
+
+**in local**
+```bash
+vendor/bin/codecept run api
+vendor/bin/codecept run api --coverage --coverage-html
+```
+
+### Run the acceptance tests
+
+**via the `api-test` docker image**
+```bash
+make run-tests-acceptance
+```
+
+**in local**
+```bash
+ACCEPTANCE_TEST_HOST=http://{host}:{port} vendor/bin/codecept run acceptance
+```
+Note : the host to test should be defined via the `ACCEPTANCE_TEST_HOST` environment variable
+
+### Publish code coverage report (on codecov.io)
+
+```bash
+CODECOV_TOKEN={token} bash <(curl -s https://codecov.io/bash) -f tests/_output/coverage.xml
+```

@@ -13,10 +13,9 @@ install:
 # Run main commands
 script:
   - vendor/bin/phpcs
-  - vendor/bin/codecept run unit,api
-  #- make run-tests-unit
-  #- make run-tests-api
-  #- make run-tests-acceptance
+  - vendor/bin/codecept run unit,api --coverage --coverage-xml
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -f tests/_output/coverage.xml
 # Tell Travis CI to monitor only 'master' branch
 branches:
   only: 
