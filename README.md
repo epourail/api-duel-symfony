@@ -10,10 +10,12 @@ Features
   - [x] api-nginx : NGINX 1.17
   - [x] api-tests : CodeCeption 4.0
 - [x] Makefile
+- [x] Tests : unitary, api, acceptance
 - [x] Continuous Integration : Travis
 - [x] Code Coverage Report : Codecov
 - [x] Code quality
-  - [x] PHP Code Sniffer 
+  - [x] PHP Code Sniffer (phpcs)
+  - [x] PHP Static Analysis (phpstan) 
 
 ## Build
 
@@ -130,3 +132,4 @@ Note : the host to test should be defined via the `ACCEPTANCE_TEST_HOST` environ
 ```bash
 CODECOV_TOKEN={token} bash <(curl -s https://codecov.io/bash) -f tests/_output/coverage.xml
 ```
+Note : the **Codecov.io** repository token should be defined via the `CODECOV_TOKEN` environment variable

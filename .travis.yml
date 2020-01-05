@@ -13,6 +13,7 @@ install:
 # Run main commands
 script:
   - vendor/bin/phpcs
+  - vendor/bin/phpstan analyse src --ansi
   - vendor/bin/codecept run unit,api --coverage --coverage-xml
 after_success:
   - bash <(curl -s https://codecov.io/bash) -f tests/_output/coverage.xml

@@ -1,8 +1,11 @@
 <?php namespace App\Tests;
 
-use App\Tests\ApiTester;
 use Codeception\Util\HttpCode;
 
+/**
+ * Class PingCest
+ * @package App\Tests
+ */
 class PingCest
 {
     // tests

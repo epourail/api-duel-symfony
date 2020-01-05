@@ -3,6 +3,10 @@
 use App\Controller\PingController;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class PingControllerTest
+ * @package App\Tests
+ */
 class PingControllerTest extends \Codeception\Test\Unit
 {
     /**
